@@ -1,0 +1,44 @@
+Barang
+Attribute
+int id
+string nama
+int harga
+int stok
+
+PartKomputer
+Attribute
+string noPart
+string manufaktur
+string kondisi
+
+Motherboard extend PartKomputer
+Attribute
+string socket
+int DDR_Ver
+string chipset
+
+Processor extend PartKomputer
+Attribute
+string socket
+int core
+int thread
+int TDP
+
+Ram extend PartKomputer
+Attribute
+int DDR_Ver
+int memory
+int speed
+
+GPU extend PartKomputer
+Attribute
+int memory
+int TDP
+int pcieGen
+
+Komputer extend Barang
+Attribute
+agregation Motherboard
+agregation Processor
+agregation Ram
+agregation GPU
