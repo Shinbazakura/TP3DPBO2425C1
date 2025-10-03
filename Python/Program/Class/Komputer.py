@@ -6,37 +6,50 @@ from Class.GPU import GPU
 
 class Komputer(Barang):
     def __init__(self, id=0, nama="", harga=0, stok=0,
-                 motherboard=None, processor=None, ram=None, gpu=None):
+                 # Motherboard params
+                 mb_id=0, mb_nama="", mb_harga=0, mb_stok=0,
+                 mb_no_part="", mb_manufaktur="", mb_kondisi="",
+                 mb_socket="", mb_ddr=0, mb_chipset="",
+
+                 # Processor params
+                 p_id=0, p_nama="", p_harga=0, p_stok=0,
+                 p_no_part="", p_manufaktur="", p_kondisi="",
+                 p_socket="", p_core=0, p_thread=0, p_tdp=0,
+
+                 # RAM params
+                 r_id=0, r_nama="", r_harga=0, r_stok=0,
+                 r_no_part="", r_manufaktur="", r_kondisi="",
+                 r_ddr=0, r_memory=0, r_speed=0,
+
+                 # GPU params
+                 g_id=0, g_nama="", g_harga=0, g_stok=0,
+                 g_no_part="", g_manufaktur="", g_kondisi="",
+                 g_memory=0, g_tdp=0, g_pcie=0):
         super().__init__(id, nama, harga, stok)
-        self.motherboard = motherboard if motherboard else Motherboard()
-        self.processor = processor if processor else Processor()
-        self.ram = ram if ram else Ram()
-        self.gpu = gpu if gpu else GPU()
 
-    # Setter & Getter Motherboard
-    def set_motherboard(self, mb: Motherboard):
-        self.motherboard = mb
+        # Composition: Komputer owns these components
+        self.motherboard = Motherboard(mb_id, mb_nama, mb_harga, mb_stok,
+                                       mb_no_part, mb_manufaktur, mb_kondisi,
+                                       mb_socket, mb_ddr, mb_chipset)
+        self.processor = Processor(p_id, p_nama, p_harga, p_stok,
+                                   p_no_part, p_manufaktur, p_kondisi,
+                                   p_socket, p_core, p_thread, p_tdp)
+        self.ram = Ram(r_id, r_nama, r_harga, r_stok,
+                       r_no_part, r_manufaktur, r_kondisi,
+                       r_ddr, r_memory, r_speed)
+        self.gpu = GPU(g_id, g_nama, g_harga, g_stok,
+                       g_no_part, g_manufaktur, g_kondisi,
+                       g_memory, g_tdp, g_pcie)
 
+    # Getters only (no setters → composition = owned by Komputer)
     def get_motherboard(self) -> Motherboard:
         return self.motherboard
-
-    # Setter & Getter Processor
-    def set_processor(self, p: Processor):
-        self.processor = p
 
     def get_processor(self) -> Processor:
         return self.processor
 
-    # Setter & Getter RAM
-    def set_ram(self, r: Ram):
-        self.ram = r
-
     def get_ram(self) -> Ram:
         return self.ram
-
-    # Setter & Getter GPU
-    def set_gpu(self, g: GPU):
-        self.gpu = g
 
     def get_gpu(self) -> GPU:
         return self.gpu
